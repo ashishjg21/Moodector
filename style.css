@@ -1,0 +1,14 @@
+body {
+  background-color: WhiteSmoke;
+  margin-left: 40px;
+  margin-right: 40px;
+  font: "Georgia";
+}
+
+h1 {
+  font: "Georgia";
+  color: black;
+  background-color: #D3D3D3;
+  margin-top: 40px;
+  margin-bottom: 15px;
+}
