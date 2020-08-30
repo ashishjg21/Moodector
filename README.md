@@ -1,6 +1,6 @@
 # Suns Out Hacks Out | Major League Hacking
 
-<img src="data/team_logo.png" width="180">
+<img src="data/banner.png">
 
 # Moodector 
 A simple web app that uses ML to detect the mood of a user.
