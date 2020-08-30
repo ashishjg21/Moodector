@@ -27,9 +27,21 @@
             // Request body.
             data: '{"url": ' + '"' + sourceImageUrl + '"}',
         })
+
             .done(function(data) {
                 // Show formatted JSON on webpage.
-                $("#responseTextArea").val(JSON.stringify(data, null, 2));
+                //$("#responseTextArea").val(JSON.stringify(data, null, 2));
+                var max = 0;
+                var index = 0;
+                for (var i=0; i<data['predictions'].length; i++) {
+                    if (data['predictions'][i]['probability'] > max) {
+                        index = i;
+                        max = data['predictions'][0]['probability'];
+                    }
+                }
+                const results = "Mood: " + data['predictions'][index]['tagName'] + "\n" + "Confidence: " + Math.round(100 * max) + "%";
+
+                $("#responseTextArea").val(results);
             })
             .fail(function(jqXHR, textStatus, errorThrown) {
                 // Display error message.
@@ -56,10 +68,10 @@ Image to analyze:
         <img id="sourceImage" width="400" />
     </div>
     <div id="jsonOutput" style="width:600px; display:table-cell;">
-        Response:
+        Result:
         <br><br>
-        <textarea id="responseTextArea" class="UIInput"
-                  style="width:580px; height:400px;"></textarea>
+        <textarea id="responseTextArea" class="UIInput";
+                  style="width:180px; height:50px; font-family:'Trebuchet MS'; font-size:20px"></textarea>
     </div>
 </div>
 </body>
