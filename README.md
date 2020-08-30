@@ -1,4 +1,4 @@
-# Mood-Dectector-
+# Mood Detector 
 A simple web app using ML to detect mood of user.
 
 ## General Information
@@ -13,6 +13,6 @@ The web application demonstrates how mood classification works for a panel of fo
 One potential extension to this project is to have a continuous analysis of a student's emotional state. Students’ response to the lecture changes throughout the lecture and a real-time analysis would be much more informative to the instructor than a single snapshot. However, we would need to be aware of how much analysis is acceptable and make sure that this feature does not invade students’ privacy. The data could be anonymized so that privacy is protected and the instructor can still see the points during the lecture when students are confused. Additionally, we could extend this project by providing a greater range of emotional states and more accurate results.
 
 ## Team
-[Vedant Bahel](https://github.com/vedantbahel), [Marcus Christerson](https://github.com/marcusch), [Ashish Galagali](https://github.com/AshishJGalagali), Priyan Shuone, [Melissa Mitchell](https://github.com/MCMitchell8) 
+[Vedant Bahel](https://github.com/vedantbahel), [Marcus Christerson](https://github.com/marcusch), [Ashish Galagali](https://github.com/AshishJGalagali), [Priyanshu Agarwal](https://github.com/MCMitchell8), [Melissa Mitchell](https://github.com/MCMitchell8) 
 
 
