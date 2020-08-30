@@ -1,10 +1,7 @@
 # Suns Out Hacks Out | Major League Hacking
-
-![Logo](https://github.com/AshishJGalagali/Moodector/blob/master/data/Logo%20(1).png)
-
 # Moodector 
 A simple web app that uses ML to detect the mood of a user.
-![Glimpse](https://github.com/AshishJGalagali/Moodector/blob/master/data/Moodector!.png | width=500)
+![Glimpse](https://github.com/AshishJGalagali/Moodector/blob/master/data/Moodector!.png)
 
 ## General Information
 The COVID-19 pandemic has resulted in over 1 billion students worldwide facing school closures. As schools continue adjusting to remote learning, we must address the novel challenges that online learning presents. One such challenge is the inability of instructors to determine how well students are engaging with the lecture. Unlike physical lectures where the instructor presents to a live audience, web conferences makes it difficult for the instructor to monitor the reactions of all the students. As summer ends and the fall term begins, this problem becomes even more pressing.
