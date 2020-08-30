@@ -29,8 +29,7 @@
         })
 
             .done(function(data) {
-                // Show formatted JSON on webpage.
-                //$("#responseTextArea").val(JSON.stringify(data, null, 2));
+                // Show result with highest probability
                 var max = 0;
                 var index = 0;
                 for (var i=0; i<data['predictions'].length; i++) {
