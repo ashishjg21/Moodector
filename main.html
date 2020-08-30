@@ -6,15 +6,12 @@
     <link rel="stylesheet" type="text/css" href="style.css" media="screen"/>
 </head>
 <body>
-<script type="text/javascript">
+<script>
     function processImage() {
-        // **********************************************
-        // *** Update or verify the following values. ***
-        // **********************************************
-        let subscriptionKey = '87140ffeaece4eca9219040ea40a4540'; // CURRENT ONE JUST FOR TESTING
-        let endpoint = 'https://southcentralus.api.cognitive.microsoft.com/customvision/v3.0/Prediction/88583a50-9fff-41e5-9300-329cab703b73/classify/iterations/Iteration1/url';
+        let subscriptionKey = '87140ffeaece4eca9219040ea40a4540';
+        let endpoint = '';
         if (!subscriptionKey) { throw new Error('Set your environment variables for your subscription key and endpoint.'); }
-        
+
         // Display the image.
         var sourceImageUrl = document.getElementById("inputImage").value;
         document.querySelector("#sourceImage").src = sourceImageUrl;
@@ -30,39 +27,39 @@
             // Request body.
             data: '{"url": ' + '"' + sourceImageUrl + '"}',
         })
-        .done(function(data) {
-            // Show formatted JSON on webpage.
-            $("#responseTextArea").val(JSON.stringify(data, null, 2));
-        })
-        .fail(function(jqXHR, textStatus, errorThrown) {
-            // Display error message.
-            var errorString = (errorThrown === "") ? "Error. " :
-                errorThrown + " (" + jqXHR.status + "): ";
-            errorString += (jqXHR.responseText === "") ? "" :
-                jQuery.parseJSON(jqXHR.responseText).message;
-            alert(errorString);
-        });
+            .done(function(data) {
+                // Show formatted JSON on webpage.
+                $("#responseTextArea").val(JSON.stringify(data, null, 2));
+            })
+            .fail(function(jqXHR, textStatus, errorThrown) {
+                // Display error message.
+                var errorString = (errorThrown === "") ? "Error. " :
+                    errorThrown + " (" + jqXHR.status + "): ";
+                errorString += (jqXHR.responseText === "") ? "" :
+                    jQuery.parseJSON(jqXHR.responseText).message;
+                alert(errorString);
+            });
     };
 </script>
-<h1>Analyze Student Expressions in Video Conference:</h1>
-Enter the URL to an image, then click the <strong>Analyze image</strong> button.
+<p style="font-family:'Trebuchet MS'; font-size:28px"> Analyze Student Expressions in Video Conference: </p>
+<p style="font-family:'Trebuchet MS'; font-size:15px"> Enter the URL to an image, then click the <strong>Analyze </strong> button.
 <br><br>
 Image to analyze:
 <input type="text" name="inputImage" id="inputImage"
-    value="https://southcentralus.api.cognitive.microsoft.com/customvision/v3.0/Prediction/88583a50-9fff-41e5-9300-329cab703b73/classify/iterations/Iteration1/image" />
-<button onclick="processImage()">Analyze image</button>
+       value="" />
+<button onclick="processImage()">Analyze</button>
 <br><br>
-<div id="wrapper" style="width:1020px; display:table;">
+<div id="wrapper" style="width:1020px; display:table; font-family:'Trebuchet MS'; font-size:15px">
+    <div id="imageDiv" style="width:420px; display:table-cell;">
+        Source image:
+        <br><br>
+        <img id="sourceImage" width="400" />
+    </div>
     <div id="jsonOutput" style="width:600px; display:table-cell;">
         Response:
         <br><br>
         <textarea id="responseTextArea" class="UIInput"
                   style="width:580px; height:400px;"></textarea>
-    </div>
-    <div id="imageDiv" style="width:420px; display:table-cell;">
-        Source image:
-        <br><br>
-        <img id="sourceImage" width="400" />
     </div>
 </div>
 </body>
