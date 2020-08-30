@@ -1,4 +1,4 @@
-# Mood Detector 
+# Moodector
 A simple web app using ML to detect mood of user.
 
 ## General Information
