@@ -9,7 +9,7 @@
 <script>
     function processImage() {
         let subscriptionKey = '87140ffeaece4eca9219040ea40a4540';
-        let endpoint = '';
+        let endpoint = 'https://southcentralus.api.cognitive.microsoft.com/customvision/v3.0/Prediction/88583a50-9fff-41e5-9300-329cab703b73/classify/iterations/Iteration1/url';
         if (!subscriptionKey) { throw new Error('Set your environment variables for your subscription key and endpoint.'); }
 
         // Display the image.
@@ -27,9 +27,21 @@
             // Request body.
             data: '{"url": ' + '"' + sourceImageUrl + '"}',
         })
+
             .done(function(data) {
                 // Show formatted JSON on webpage.
-                $("#responseTextArea").val(JSON.stringify(data, null, 2));
+                //$("#responseTextArea").val(JSON.stringify(data, null, 2));
+                var max = 0;
+                var index = 0;
+                for (var i=0; i<data['predictions'].length; i++) {
+                    if (data['predictions'][i]['probability'] > max) {
+                        index = i;
+                        max = data['predictions'][0]['probability'];
+                    }
+                }
+                const results = "Mood: " + data['predictions'][index]['tagName'] + "\n" + "Confidence: " + Math.round(100 * max) + " %";
+
+                $("#responseTextArea").val(results);
             })
             .fail(function(jqXHR, textStatus, errorThrown) {
                 // Display error message.
