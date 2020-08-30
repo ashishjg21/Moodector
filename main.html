@@ -5,18 +5,32 @@
     <script src="https://ajax.googleapis.com/ajax/libs/jquery/1.9.0/jquery.min.js"></script>
 </head>
 <body>
-<script type="text/javascript">
+<script>
+    var canvas = document.createElement('canvas'),
+        ctx = canvas.getContext('2d'),
+        parts = [],
+        img = new Image();
+
     function processImage() {
         // **********************************************
         // *** Update or verify the following values. ***
         // **********************************************
-        let subscriptionKey = '87140ffeaece4eca9219040ea40a4540'; // CURRENT ONE JUST FOR TESTING
-        let endpoint = 'https://southcentralus.api.cognitive.microsoft.com/customvision/v3.0/Prediction/88583a50-9fff-41e5-9300-329cab703b73/classify/iterations/Iteration1/url';
+        let subscriptionKey = '87140ffeaece4eca9219040ea40a4540';
+        let endpoint = '';
         if (!subscriptionKey) { throw new Error('Set your environment variables for your subscription key and endpoint.'); }
-        
-        // Display the image.
-        var sourceImageUrl = document.getElementById("inputImage").value;
-        document.querySelector("#sourceImage").src = sourceImageUrl;
+
+        // Display the images
+
+        img.src = document.getElementById("inputImage").value;
+        img.onload = split;
+
+        // display's null images -- probably because the array is empty
+        document.querySelector("#face1").src = parts[0];
+        document.querySelector("#face2").src = parts[1];
+        document.querySelector("#face3").src = parts[2];
+        document.querySelector("#face4").src = parts[3];
+
+
         // Make the REST API call.
         $.ajax({
             url: endpoint + "?",
@@ -29,26 +43,48 @@
             // Request body.
             data: '{"url": ' + '"' + sourceImageUrl + '"}',
         })
-        .done(function(data) {
-            // Show formatted JSON on webpage.
-            $("#responseTextArea").val(JSON.stringify(data, null, 2));
-        })
-        .fail(function(jqXHR, textStatus, errorThrown) {
-            // Display error message.
-            var errorString = (errorThrown === "") ? "Error. " :
-                errorThrown + " (" + jqXHR.status + "): ";
-            errorString += (jqXHR.responseText === "") ? "" :
-                jQuery.parseJSON(jqXHR.responseText).message;
-            alert(errorString);
-        });
+            .done(function(data) {
+                // Show formatted JSON on webpage.
+                $("#responseTextArea").val(JSON.stringify(data, null, 2));
+            })
+            .fail(function(jqXHR, textStatus, errorThrown) {
+                // Display error message.
+                var errorString = (errorThrown === "") ? "Error. " :
+                    errorThrown + " (" + jqXHR.status + "): ";
+                errorString += (jqXHR.responseText === "") ? "" :
+                    jQuery.parseJSON(jqXHR.responseText).message;
+                alert(errorString);
+            });
     };
+
+    function split() {
+
+        var w2 = img.width / 2,
+            h2 = img.height / 2;
+
+        for(var i=0; i<4; i++) {
+            var x = (-w2*i) % (w2*2),
+                y = (h2*i)<=h2? 0 : -h2 ;
+
+            canvas.width = w2;
+            canvas.height = h2;
+
+            ctx.drawImage(this, x, y, w2*2, h2*2);
+
+            parts.push(canvas.toDataURL());
+
+        }
+        return parts;
+
+    }
+
 </script>
 <h1>Analyze image:</h1>
 Enter the URL to an image, then click the <strong>Analyze image</strong> button.
 <br><br>
 Image to analyze:
 <input type="text" name="inputImage" id="inputImage"
-    value="https://southcentralus.api.cognitive.microsoft.com/customvision/v3.0/Prediction/88583a50-9fff-41e5-9300-329cab703b73/classify/iterations/Iteration1/image" />
+       value= "Need " />
 <button onclick="processImage()">Analyze image</button>
 <br><br>
 <div id="wrapper" style="width:1020px; display:table;">
@@ -61,7 +97,10 @@ Image to analyze:
     <div id="imageDiv" style="width:420px; display:table-cell;">
         Source image:
         <br><br>
-        <img id="sourceImage" width="400" />
+        <img id="face1" width="400" />
+        <img id="face2" width="400" />
+        <img id="face3" width="400" />
+        <img id="face4" width="400" />
     </div>
 </div>
 </body>
